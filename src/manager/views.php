@@ -37,3 +37,5 @@ class ContactView extends View {
         }
     }
 }
+
+>
