@@ -29,7 +29,7 @@ class UserPage {
 
     // Método para obtener todos los usuarios
     public function getUsers() {
-        $sql = "SELECT * FROM users";
+        $sql = "SELECT * FROM Users";
         $result = $this->conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -52,7 +52,7 @@ class UserPage {
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
             echo "<td>" . $row['id'] . "</td>";
-            echo "<td>" . $row['name'] . "</td>";
+            echo "<td>" . $row['username'] . "</td>";
             echo "<td>" . $row['email'] . "</td>";
             echo "</tr>";
         }
