@@ -25,7 +25,7 @@ class AboutView extends View {
 class ContactView extends View {
     public function get() {
         // Incluir el archivo de la plantilla
-        include_once __DIR__ . '/../layouts/contact.php';
+        include_once __DIR__ . '/../layouts/test.php';
     }
 
     public function post() {

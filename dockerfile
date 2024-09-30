@@ -13,6 +13,10 @@ RUN chown -R www-data:www-data /var/www/html
 # Dar permisos de lectura y escritura a los archivos
 RUN chmod -R 755 /var/www/html
 
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+
+RUN service apache2 restart
+
 # Exponer el puerto 80
 EXPOSE 80
 

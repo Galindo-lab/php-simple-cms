@@ -12,7 +12,7 @@ services:
       - app-network
     depends_on:
       - db
-    command: bash -c "a2enmod rewrite && apache2-foreground"
+    command: bash -c "apt-get update && apt-get install -y libpng-dev libjpeg-dev && docker-php-ext-configure gd --with-jpeg && docker-php-ext-install gd mysqli && a2enmod rewrite && apache2-foreground"
 
   # MySQL Database
   db:
