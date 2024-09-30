@@ -1,7 +1,20 @@
 RewriteEngine On
 RewriteBase /
 
-# Si el archivo o directorio no existe, redirige al router.php
+# Bloquear acceso directo a cualquier archivo PHP excepto al enrutador (index.php)
+<FilesMatch "\.(php)$">
+    Order Deny,Allow
+    Deny from all
+    Allow from localhost
+</FilesMatch>
+
+# exepto al router 
+<Files "index.php">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Si el archivo o directorio no existe, redirige al index.php (router.php)
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php [QSA,L]
