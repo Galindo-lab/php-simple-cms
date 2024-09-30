@@ -6,14 +6,14 @@ services:
     container_name: php_apache
     volumes:
       - ./src:/var/www/html
+      - ./entrypoint.sh:/entrypoint.sh  # Montar el script de entrada
     ports:
       - "8080:80"
     networks:
       - app-network
     depends_on:
       - db
-    # instalar
-    command: bash -c "apt-get update && apt-get install -y libpng-dev libjpeg-dev && docker-php-ext-configure gd --with-jpeg && docker-php-ext-install gd mysqli && a2enmod rewrite && apache2-foreground"
+    entrypoint: /entrypoint.sh  # Usar el script como entrypoint
 
   # MySQL Database
   db:

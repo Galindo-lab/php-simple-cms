@@ -1,14 +1,19 @@
 #!/bin/bash
 
-# Habilitar mod_rewrite en Apache
-echo "Habilitando mod_rewrite..."
+# Actualizar el repositorio de paquetes e instalar dependencias
+apt-get update && apt-get install -y libpng-dev libjpeg-dev
+
+# Configurar y habilitar GD con soporte para JPEG
+docker-php-ext-configure gd --with-jpeg
+
+# Instalar las extensiones necesarias como GD y mysqli
+docker-php-ext-install gd mysqli
+
+# Habilitar el módulo rewrite de Apache
 a2enmod rewrite
 
-# Corregir los permisos si es necesario
-echo "Corregir permisos de archivos si es necesario..."
-chown -R www-data:www-data /var/www/html
-chmod -R 755 /var/www/html
+# Establecer ServerName para evitar el mensaje de advertencia
+echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Iniciar Apache en modo foreground
-echo "Iniciando Apache..."
+# Ejecutar Apache en primer plano
 apache2-foreground

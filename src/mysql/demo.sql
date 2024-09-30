@@ -22,6 +22,12 @@ CREATE TABLE Posts (
 );
 
 -- Datos de prueba
-INSERT INTO Users (username, email) VALUES
-('John Doe', 'john@example.com'),
-('Jane Doe', 'jane@example.com');
+-- Insert two users into the Users table
+INSERT INTO Users (username, email, password)
+VALUES ('john_doe', 'john.doe@example.com', 'hashedpassword123'),
+       ('jane_smith', 'jane.smith@example.com', 'hashedpassword456');
+
+-- Insert two posts into the Posts table, one for each user
+INSERT INTO Posts (user_id, title, content)
+VALUES (1, 'My First Blog Post', 'This is the content of my first blog post. Welcome to my blog!'),
+       (2, 'Jane’s Insights', 'Here are some thoughts and insights about technology and life.');
