@@ -1,4 +1,5 @@
 <?php
+require_once 'settings.php';
 require_once 'manager/views.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
@@ -20,7 +21,7 @@ switch ($path) {
         break;
     default:
         http_response_code(404);
-        echo "<h1>404 Not Found</h1>";
+        include 'manager/layouts/404.php';
         return;
 }
 

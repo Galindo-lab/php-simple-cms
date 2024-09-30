@@ -24,16 +24,8 @@ class AboutView extends View {
  */
 class ContactView extends View {
     public function get() {
-        echo '<h1>Contact Us (GET)</h1>';
-        echo '<form action="/contact" method="POST">
-                <label for="name">Nombre:</label>
-                <input type="text" id="name" name="name" required>
-                <br>
-                <label for="message">Mensaje:</label>
-                <textarea id="message" name="message" required></textarea>
-                <br>
-                <input type="submit" value="Enviar">
-              </form>';
+        // Incluir el archivo de la plantilla
+        include 'layouts/contact.php';
     }
 
     public function post() {
