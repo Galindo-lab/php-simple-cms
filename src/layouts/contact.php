@@ -1,4 +1,3 @@
-<!-- templates/contact.php -->
 
 <h1>Contact Us (GET)</h1>
 <form action="/contact" method="POST">
