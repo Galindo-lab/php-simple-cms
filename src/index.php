@@ -5,9 +5,6 @@ require_once 'manager/views.php';
 $method = $_SERVER['REQUEST_METHOD'];
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-echo "Path: " . $path . "<br>";
-echo "Method: " . $method . "<br>";
-
 // Determinar qué vista utilizar basándonos en la ruta
 switch ($path) {
     case '/':
@@ -21,7 +18,7 @@ switch ($path) {
         break;
     default:
         http_response_code(404);
-        include 'manager/layouts/404.php';
+        include_once 'manager/layouts/404.php';
         return;
 }
 
