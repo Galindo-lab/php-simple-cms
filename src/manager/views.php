@@ -1,5 +1,5 @@
 <?php 
-require_once 'base/View.php';
+require_once __DIR__ . '/../base/View.php';
 
 /**
  * Clase HomeView que maneja la página de inicio ("/")
@@ -38,4 +38,3 @@ class ContactView extends View {
     }
 }
 
->
