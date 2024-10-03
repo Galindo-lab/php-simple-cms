@@ -23,3 +23,14 @@ class UserManager extends Manager {
     }
 }
 
+
+class PostsManager extends Manager {
+
+    /**
+     * Retorna todos los posts
+     * @return array
+     */
+    public static function all(): array {
+        return Manager::query(query:'SELECT * FROM Posts');
+    }
+}

@@ -2,38 +2,38 @@
 require_once 'settings.php';
 require_once 'app/views.php';
 
+// Obtener el método de la solicitud HTTP
 $method = $_SERVER['REQUEST_METHOD'];
-$path = parse_url(url: $_SERVER['REQUEST_URI'], component: PHP_URL_PATH);
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Determinar qué vista utilizar basándonos en la ruta
-switch ($path) {
-    case '/':
-        $view = new HomeView();
-        break;
-    case '/database':
-        $view = new DataBaseTestView();
-        break;
-    case '/about':
-        $view = new AboutView();
-        break;
-    case '/contact':
-        $view = new ContactView();
-        break;
-    case '/upload':
-        $view = new UploadFiles();
-        break;
-    default:
-        http_response_code(response_code: 404);
-        include_once __DIR__ . '/layouts/404.php';
-        return;
-}
+// Definir las rutas y sus correspondientes clases en un arreglo
+$routes = [
+    '/' => HomeView::class,
+    '/database' => DataBaseTestView::class,
+    '/about' => AboutView::class,
+    '/contact' => ContactView::class,
+    '/upload' => UploadFiles::class
+];
 
-// Llamar al método correcto basado en el método HTTP
-if ($method === 'GET') {
-    $view->get();
-} elseif ($method === 'POST') {
-    $view->post();
-} else {
-    http_response_code(response_code: 405); // Método no permitido
-    echo "<h1>405 Method Not Allowed</h1>";
+try {
+    // Obtener la clase de la vista correspondiente al path utilizando match
+    $viewClass = $routes[$path] ?? throw new Exception("404 Not Found");
+    // Instanciar la clase correspondiente
+    $view = new $viewClass();
+
+    // Llamar al método correcto utilizando handleRequest() y el método HTTP
+    $view->handleRequest($method);
+} catch (Exception $e) {
+    // Manejar los errores, tanto 404 como 405
+    if ($e->getMessage() === "404 Not Found") {
+        http_response_code(404); // Código de error 404 - No encontrado
+        include_once __DIR__ . '/layouts/exeptions/404.php';
+    } elseif ($e->getMessage() === "Request method '$method' not supported.") {
+        http_response_code(405); // Código de error 405 - Método no permitido
+        include_once __DIR__ . '/layouts/exeptions/405.php';
+    } else {
+        http_response_code(500); // Código de error 500 - Error interno del servidor
+        include_once __DIR__ . '/layouts/exeptions/500.php';
+        echo "<p>" . htmlspecialchars($e->getMessage()) . "</p>"; // Mostrar detalles del error
+    }
 }

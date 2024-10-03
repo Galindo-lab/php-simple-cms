@@ -7,7 +7,7 @@
 
 require_once __DIR__ . '/Connection.php';
 
-class Manager
+abstract class Manager
 {
     protected static function connection(): mysqli
     {
