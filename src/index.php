@@ -1,6 +1,6 @@
 <?php
 require_once 'settings.php';
-require_once 'manager/views.php';
+require_once 'app/views.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 $path = parse_url(url: $_SERVER['REQUEST_URI'], component: PHP_URL_PATH);
