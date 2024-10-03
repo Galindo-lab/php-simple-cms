@@ -9,6 +9,7 @@ class Utils {
 
     /**
      * Renderiza una plantilla de php utilizando los datos especificados.
+     * basado en: https://ryangjchandler.co.uk/posts/build-your-own-template-engine-in-php-rendering-echo
      * @param string $template
      * @param array $data
      * @return void
