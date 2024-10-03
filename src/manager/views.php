@@ -2,6 +2,21 @@
 require_once __DIR__ . '/../base/View.php';
 
 
+
+/**
+ * Vista para probar la base de datos, con ejemplos de Managers
+ */
+class DataBaseTestView extends View
+{
+    public function get(): void
+    {
+        include_once __DIR__ . '/../layouts/database.php';
+    }
+}
+
+
+
+
 class UploadFiles extends View
 {
     public function get(): void

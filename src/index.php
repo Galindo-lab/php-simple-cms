@@ -10,6 +10,9 @@ switch ($path) {
     case '/':
         $view = new HomeView();
         break;
+    case '/database':
+        $view = new DataBaseTestView();
+        break;
     case '/about':
         $view = new AboutView();
         break;
