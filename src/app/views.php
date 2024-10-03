@@ -1,5 +1,9 @@
 <?php
 require_once __DIR__ . '/../base/View.php';
+require_once __DIR__ . '/../base/Utils.php';
+
+
+require_once __DIR__ . '/../app/managers.php';
 
 
 
@@ -10,7 +14,9 @@ class DataBaseTestView extends View
 {
     public function get($params): void
     {
-        include_once __DIR__ . '/../layouts/database.php';
+        Utils::renderTemplate(template: 'database.php', data: [
+            'users' => UserManager::all()
+        ]);
     }
 }
 
@@ -60,7 +66,11 @@ class HomeView extends View
 {
     public function get($params): void
     {
-        echo "<h1>Home Page (GET)</h1>";
+        Utils::renderTemplate(template: 'index.php', data: [
+            'title' => 'Página de Inicio',
+            'header' => 'Bienvenido a Mi Sitio Web',
+            'content' => '<p>Este es el contenido dinámico de la página de inicio.</p>'
+        ]);
     }
 }
 

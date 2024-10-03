@@ -2,7 +2,7 @@
 
 /*****************************************************************************
  * Funciones comunes para Managers.                                          *
- * Como Obtener la coneccion y hacer queries.                                *
+ * Como Obtener la conexión y hacer queries.                                 *
  *****************************************************************************/
 
 require_once __DIR__ . '/Connection.php';
