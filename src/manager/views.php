@@ -26,8 +26,8 @@ class UploadFiles extends View
         if ($uploadOk == 0) {
             echo "Sorry, your file was not uploaded.<br>";
         } else {
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.<br>";
+            if (move_uploaded_file(from: $_FILES["fileToUpload"]["tmp_name"], to: $target_file)) {
+                echo "The file " . basename(path: $_FILES["fileToUpload"]["name"]) . " has been uploaded.<br>";
                 echo "<img src='$target_file' alt='Uploaded Image' style='max-width: 500px;'><br>";
                 echo "<a href='index.php'>Upload another file</a>";
             } else {

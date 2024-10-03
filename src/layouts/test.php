@@ -1,12 +1,14 @@
+
 <?php
 
-if (function_exists('mysqli_connect')) {
+if (function_exists(function: 'mysqli_connect')) {
     echo "La extensión mysqli está instalada correctamente.";
 } else {
     echo "La extensión mysqli NO está instalada.";
 }
 
-class UserPage {
+class UserPage
+{
     private $host = 'db'; // Nombre del servicio de MySQL en Docker
     private $dbname = 'mydb';
     private $user = 'root';
@@ -14,13 +16,15 @@ class UserPage {
     private $conn;
 
     // Constructor: Establece la conexión a la base de datos
-    public function __construct() {
+    public function __construct()
+    {
         $this->connectDB();
     }
 
     // Conexión a la base de datos usando mysqli
-    private function connectDB() {
-        $this->conn = new mysqli($this->host, $this->user, $this->password, $this->dbname);
+    private function connectDB(): void
+    {
+        $this->conn = new mysqli(hostname: $this->host, username: $this->user, password: $this->password, database: $this->dbname);
 
         if ($this->conn->connect_error) {
             die("Error de conexión: " . $this->conn->connect_error);
@@ -28,20 +32,22 @@ class UserPage {
     }
 
     // Método para obtener todos los usuarios
-    public function getUsers() {
+    public function getUsers(): void
+    {
         $sql = "SELECT * FROM Users";
-        $result = $this->conn->query($sql);
+        $result = $this->conn->query(query: $sql);
 
         if ($result->num_rows > 0) {
             // Mostrar los resultados
-            $this->printTable($result);
+            $this->printTable(result: $result);
         } else {
             echo "<p>No se encontraron usuarios.</p>";
         }
     }
 
     // Método para imprimir la tabla HTML con los usuarios
-    private function printTable($result) {
+    private function printTable($result): void
+    {
         echo "<table border='1' cellpadding='10' cellspacing='0' style='width: 50%; margin: 50px auto; border-collapse: collapse;'>";
         echo "<tr>";
         echo "<th>ID</th>";
@@ -61,7 +67,8 @@ class UserPage {
     }
 
     // Destructor: Cierra la conexión a la base de datos
-    public function __destruct() {
+    public function __destruct()
+    {
         $this->conn->close();
     }
 }
