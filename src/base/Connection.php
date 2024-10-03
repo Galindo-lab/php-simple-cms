@@ -4,7 +4,7 @@
  * Basado en el artículo de 'Refactoring Guru':                              *
  * https://refactoring.guru/es/design-patterns/singleton/php/example         *
  *                                                                           *
- * Connection es un singleton que contiene toda la informacion sobre la base *
+ * Connection es un singleton que contiene toda la información sobre la base *
  * de datos asi como las credenciales para accesar, ademas permite obtener   *
  * la conexión.                                                              *
  *****************************************************************************/
