@@ -8,7 +8,7 @@ require_once __DIR__ . '/../base/View.php';
  */
 class DataBaseTestView extends View
 {
-    public function get(): void
+    public function get($params): void
     {
         include_once __DIR__ . '/../layouts/database.php';
     }
@@ -19,12 +19,12 @@ class DataBaseTestView extends View
 
 class UploadFiles extends View
 {
-    public function get(): void
+    public function get($params): void
     {
         // nada que decir
     }
 
-    public function post(): void
+    public function post($data): void
     {
         $target_dir = "uploads/";
         // Construir la ruta completa del archivo a subir
@@ -58,7 +58,7 @@ class UploadFiles extends View
  */
 class HomeView extends View
 {
-    public function get(): void
+    public function get($params): void
     {
         echo "<h1>Home Page (GET)</h1>";
     }
@@ -69,7 +69,7 @@ class HomeView extends View
  */
 class AboutView extends View
 {
-    public function get(): void
+    public function get($params): void
     {
         echo "<h1>About Us (GET)</h1>";
     }
@@ -80,13 +80,14 @@ class AboutView extends View
  */
 class ContactView extends View
 {
-    public function get(): void
+    public function get($params): void
     {
+        echo $params['a'];
         // Incluir el archivo de la plantilla
         include_once __DIR__ . '/../layouts/archivo.php';
     }
 
-    public function post(): void
+    public function post($data): void
     {
         if (isset($_POST['name']) && isset($_POST['message'])) {
             echo "<h1>Gracias, " . htmlspecialchars(string: $_POST['name']) . ". Hemos recibido tu mensaje:</h1>";

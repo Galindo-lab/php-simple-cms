@@ -7,6 +7,12 @@ require_once 'routes.php';
 $method = $_SERVER['REQUEST_METHOD'];
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
+// Obtener los parámetros de la URL (query string) para GET requests
+$queryParams = $_GET;
+
+// Obtener los datos enviados en el cuerpo de la solicitud para POST requests
+$postData = $_POST;
+
 
 try {
     // Obtener la clase de la vista correspondiente al path utilizando match
@@ -14,8 +20,13 @@ try {
     // Instanciar la clase correspondiente
     $view = new $viewClass();
 
-    // Llamar al método correcto utilizando handleRequest() y el método HTTP
-    $view->handleRequest($method);
+    // Llamar al método correcto utilizando handleRequest() y pasando los parámetros según el método HTTP
+    match ($method) {
+        'GET' => $view->get($queryParams),
+        'POST' => $view->post($postData),
+        default => throw new Exception("Request method '$method' not supported.")
+    };
+    
 } catch (Exception $e) {
     // Manejar los errores, tanto 404 como 405
     if ($e->getMessage() === "404 Not Found") {
