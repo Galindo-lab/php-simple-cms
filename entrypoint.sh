@@ -15,5 +15,9 @@ a2enmod rewrite
 # Establecer ServerName para evitar el mensaje de advertencia
 echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
+# Añadir permisos para el directorio uploads
+chown -R www-data:www-data /var/www/html/uploads
+chmod -R 777 /var/www/html/uploads  
+
 # Ejecutar Apache en primer plano
 apache2-foreground

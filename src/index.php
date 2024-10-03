@@ -16,9 +16,12 @@ switch ($path) {
     case '/contact':
         $view = new ContactView();
         break;
+    case '/upload':
+        $view = new UploadFiles();
+        break;
     default:
         http_response_code(404);
-        include_once 'manager/layouts/404.php';
+        include_once __DIR__ . '/layouts/404.php';
         return;
 }
 

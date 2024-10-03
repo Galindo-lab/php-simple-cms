@@ -7,6 +7,7 @@ services:
     volumes:
       - ./src:/var/www/html
       - ./entrypoint.sh:/entrypoint.sh  # Montar el script de entrada
+      - ./php.ini:/usr/local/etc/php/php.ini  # Añadir el php.ini
     ports:
       - "8080:80"
     networks:
@@ -28,7 +29,7 @@ services:
       # - db_data:/var/lib/mysql
       - ./src/mysql/demo.sql:/docker-entrypoint-initdb.d/demo.sql  # Montar el SQL para la inicialización
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - app-network
 
