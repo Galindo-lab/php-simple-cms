@@ -1,19 +1,12 @@
 <?php
 require_once 'settings.php';
 require_once 'app/views.php';
+require_once 'routes.php';
 
 // Obtener el método de la solicitud HTTP
 $method = $_SERVER['REQUEST_METHOD'];
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Definir las rutas y sus correspondientes clases en un arreglo
-$routes = [
-    '/' => HomeView::class,
-    '/database' => DataBaseTestView::class,
-    '/about' => AboutView::class,
-    '/contact' => ContactView::class,
-    '/upload' => UploadFiles::class
-];
 
 try {
     // Obtener la clase de la vista correspondiente al path utilizando match
