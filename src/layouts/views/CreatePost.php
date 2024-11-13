@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../../base/Config.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -12,13 +11,12 @@ require_once __DIR__ . '/../../base/Config.php';
     <title>Crear una entrada</title>
 
     <link rel="stylesheet" href="<?= '../' . Config::$STATIC_ROOT . 'Lumpia.css' ?>">
-
 </head>
 
 <body>
     <h1>Crear una entrada</h1>
 
-    <form action="/entry/new" method="post">
+    <form action="/entries/new" method="post">
         <p>
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="name" required>
@@ -31,8 +29,11 @@ require_once __DIR__ . '/../../base/Config.php';
             <small>Escribe el contenido de tu entrada aquí.</small>
         </p>
 
-        <button type="button"> Cancelar </button>
-        <button type="submit">Enviar</button>
+
+        <p>
+            <button type="button">Cancelar</button>
+            <button type="submit">Enviar</button>
+        </p>
     </form>
 </body>
 

@@ -4,15 +4,43 @@ require_once __DIR__ . '/../base/Utils.php';
 require_once __DIR__ . '/../app/managers.php';
 
 
+/**
+ * Vista para ver todos los posts hechos
+ */
+class PostList extends View
+{
+    public function get($params): void
+    {
+        Utils::renderTemplate(template: 'views/ListPosts.php', data: [
+            'posts' => PostsManager::all()
+        ]);
+    }
+}
+ 
 
+/**
+ * Vista para crear Posts
+ */
 class CreatePost extends View
 {
-    public function get($params): void {
+    public function get($params): void
+    {
         Utils::renderTemplate(template: 'views/CreatePost.php');
     }
 
-    public function post($params): void {
-        echo $_POST['name'];
+    public function post($params): void
+    {
+        // Datos del post
+        $title = $_POST['name'];
+        $content = $_POST['entry'];
+        $user_id = 1; // ID del usuario que crea el post
+
+        // Intentar crear el post
+        if (PostsManager::create($title, $content, $user_id)) {
+            echo "Post creado exitosamente.";
+        } else {
+            echo "Error al crear el post.";
+        }
     }
 }
 
