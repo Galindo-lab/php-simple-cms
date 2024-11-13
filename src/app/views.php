@@ -22,8 +22,6 @@ class UserLogin extends View
         } else {
             echo "Nombre de usuario o contraseña incorrectos.";
         }
-
-        echo $username . $password;
     }
 }
 
