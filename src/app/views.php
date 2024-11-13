@@ -177,11 +177,17 @@ class HomeView extends View
 {
     public function get($params): void
     {
+
+        header('Location: /login');
+
+        /*
         Utils::renderTemplate(template: 'index.php', data: [
             'title' => 'Página de Inicio',
             'header' => 'Bienvenido a Mi Sitio Web',
             'content' => '<p>Este es el contenido dinámico de la página de inicio.</p>'
         ]);
+        */
+
     }
 }
 
