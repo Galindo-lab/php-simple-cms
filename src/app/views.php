@@ -5,19 +5,45 @@ require_once __DIR__ . '/../app/managers.php';
 
 
 /**
- * 
+ * Editar post
  */
 class EditPost extends View
 {
-    public function get($params): void {
+    public function get($params): void
+    {
         if (isset($_GET['id'])) {
             $id = intval(value: $_GET['id']); // Asegurarse de que sea un entero
             $post = PostsManager::getById(id: $id); // asegurarse que le post existe
 
-            $_POST['name'] = $post['title'];
-            $_POST['entry'] = $post['content'];
+            Utils::renderTemplate(template: 'views/EditPost.php', data: [
+                'title' => $post['title'],
+                'content' => $post['content'],
+                'user_id' => $post['user_id'],
+                'post_id' => $post['id'],
+            ]);
+        }
+    }
 
-            Utils::renderTemplate(template: 'views/CreatePost.php');
+
+    public function post($params): void
+    {
+        if (isset($_POST['post_id'], $_POST['name'], $_POST['entry'])) {
+            $postId = $_POST['post_id'];
+            $name = $_POST['name'];
+            $entry = $_POST['entry'];
+
+            // Actualizar solo los campos del post.
+            if (PostsManager::updatePost($postId, [
+                'title' => $name,
+                'content' => $entry
+                ])) {
+                    
+                Utils::redirect('/posts');
+            } else {
+                echo "Error al actualizar el post.";
+            }
+        } else {
+            echo "Faltan parámetros necesarios.";
         }
     }
 }
@@ -33,8 +59,8 @@ class DeletePost extends View
     {
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']); // Asegurarse de que sea un entero
-            
-            if(PostsManager::deleteById($id)) {
+
+            if (PostsManager::deleteById($id)) {
                 Utils::redirect('/posts');
             } else {
                 echo "Error";
@@ -89,7 +115,7 @@ class UserLogin extends View
         if (UserManager::verifyCredentials($username, $password)) {
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $username;
-            
+
             header('Location: /posts');
         } else {
             echo "Nombre de usuario o contraseña incorrectos.";
@@ -152,12 +178,10 @@ class CreatePost extends View
         $content = $_POST['entry'];
 
         // falta validación 
-        $user_id = UserManager::getIdByUsername($_SESSION['username']);
-
-        // $user_id = 1; // ID del usuario que crea el post
+        $user_id = UserManager::getIdByUsername(username: $_SESSION['username']);
 
         // Intentar crear el post
-        if (PostsManager::create($title, $content, $user_id)) {
+        if (PostsManager::create(title: $title, content: $content, user_id: $user_id)) {
             header('Location: /posts'); // regirigir al usuario
         } else {
             echo "Error al crear el post.";

@@ -143,4 +143,32 @@ class PostsManager extends Manager
             return false;
         }
     }
+
+    public static function updatePost(int $postId, array $fields): bool
+    {
+        if (empty($fields)) {
+            return false; // No hay campos para actualizar.
+        }
+    
+        $conn = self::connection();
+        $columns = array_keys($fields);
+        $placeholders = implode(' = ?, ', $columns) . ' = ?';
+    
+        $query = "UPDATE Posts SET $placeholders WHERE id = ?";
+        $stmt = $conn->prepare($query);
+    
+        if ($stmt) {
+            $values = array_values($fields);
+            $values[] = $postId; // Solo utilizamos el postId para identificar el registro.
+    
+            $types = str_repeat('s', count($fields)) . 'i';
+            $stmt->bind_param($types, ...$values);
+    
+            return $stmt->execute();
+        }
+    
+        return false;
+    }
+    
+
 }
