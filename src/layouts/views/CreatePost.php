@@ -16,7 +16,7 @@ require_once __DIR__ . '/../../base/Config.php';
 <body>
     <h1>Crear una entrada</h1>
 
-    <form action="/entries/new" method="post">
+    <form action="/posts/new" method="post">
         <p>
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="name" required>

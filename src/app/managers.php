@@ -58,4 +58,25 @@ class PostsManager extends Manager
             return false;
         }
     }
+
+    /**
+     * Obtiene un post por su ID.
+     *
+     * @param int $id El ID del post que deseas obtener.
+     *
+     * @return array Devuelve un array con los datos del post o un array vacío si no se encuentra.
+     */
+    public static function getById($id): array
+    {
+        $conn = self::connection();
+        $stmt = $conn->prepare("SELECT * FROM Posts WHERE id = ?");
+        if ($stmt) {
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_assoc() ?: [];
+        } else {
+            return [];
+        }
+    }
 }

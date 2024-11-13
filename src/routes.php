@@ -7,6 +7,7 @@ $routes = [
     '/upload' => UploadFiles::class,
 
 
-    '/entries/new' => CreatePost::class,
-    '/entries' => PostList::class
+    '/posts' => PostList::class,
+    '/posts/new' => CreatePost::class,
+    '/posts/view' => ViewPost::Class
 ];

@@ -5,6 +5,31 @@ require_once __DIR__ . '/../app/managers.php';
 
 
 /**
+ * Vista con la entrada del blog
+ */
+class ViewPost extends View
+{
+    public function get($params): void 
+    {
+        if (isset($_GET['id'])) {
+            $id = intval($_GET['id']); // Asegurarse de que sea un entero
+            $post = PostsManager::getById($id); // Obtener el post por ID
+
+            // echo $post["content"];
+
+            Utils::renderTemplate(template: 'views/ViewPost.php', data: [
+                'title' => $post['title'],
+                'content' => $post["content"],
+                'created_at' => $post["created_at"]
+            ]);
+        }
+
+
+    }
+}
+
+
+/**
  * Vista para ver todos los posts hechos
  */
 class PostList extends View
@@ -37,7 +62,7 @@ class CreatePost extends View
 
         // Intentar crear el post
         if (PostsManager::create($title, $content, $user_id)) {
-            header('Location: /entries'); // regirigir al usuario
+            header('Location: /posts'); // regirigir al usuario
         } else {
             echo "Error al crear el post.";
         }

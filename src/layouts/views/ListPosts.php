@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../base/Config.php';
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,18 +12,20 @@ require_once __DIR__ . '/../../base/Config.php';
 
     <link rel="stylesheet" href="<?= '../' . Config::$STATIC_ROOT . 'Lumpia.css' ?>">
 </head>
+
 <body>
     <h1>Posts</h1>
 
     <p>
-        [ <a href="entries/new">Crear Post</a> ]
+        <ul>
+            <li><a href="posts/new">Crear Post</a></li>
+        </ul>
     </p>
 
     <table>
         <thead>
             <tr>
                 <th>ID</th>
-                <th>User</th>
                 <th>Title</th>
                 <th>Created At</th>
                 <th>Updated At</th>
@@ -31,10 +34,9 @@ require_once __DIR__ . '/../../base/Config.php';
         <tbody>
             <?php
             foreach ($posts as $post) {
-                echo "<tr>";
                 echo "<td>{$post['id']}</td>";
-                echo "<td>{$post['user_id']}</td>";
-                echo "<td>{$post['title']}</td>";
+                echo "<td><a href='/posts/view?id={$post['id']}'>{$post['title']}</a></td>";
+                echo "<td>{$post['created_at']}</td>";
                 echo "<td>{$post['updated_at']}</td>";
                 echo "</tr>";
             }
@@ -42,4 +44,5 @@ require_once __DIR__ . '/../../base/Config.php';
         </tbody>
     </table>
 </body>
+
 </html>
