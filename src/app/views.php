@@ -5,14 +5,14 @@ require_once __DIR__ . '/../app/managers.php';
 
 
 
-class CreateEntry extends View
+class CreatePost extends View
 {
     public function get($params): void {
-        Utils::renderTemplate(template: 'views/CreateEntry.php');
+        Utils::renderTemplate(template: 'views/CreatePost.php');
     }
 
     public function post($params): void {
-
+        echo $_POST['name'];
     }
 }
 

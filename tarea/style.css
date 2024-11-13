@@ -1,0 +1,67 @@
+:root {
+    --fuenteEncabezado: sans-serif;
+    --fuenteParrafos: sans-serif;
+
+    --primario: red;
+    --claro: #e1e1e1;
+    --negro: #000;
+    --gris: #e1e1e1;
+    --grisOscuro: darkgrey;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*, *::before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: var(--fuenteEncabezado);
+    font-size: 1.6rem;
+    line-height: 1.2;
+}
+
+.container {
+    width: min(90%, 120rem);
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--fuenteEncabezado);
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+h2 {
+    font-size: 3.2rem;
+}
+
+.header {
+
+    background-image: url(https://magazine.tagheuer.com/wp-content/uploads/2021/10/wbn2111.ba0639-lifestyle-ryan-gosling-full-frame-rgb-001-copie-1920x1080-1920x1080-c-default.png.webp);
+    margin: 0;
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+    width: 100%;
+    background-size: cover;
+    color: var(--claro);
+
+    h2 {
+        text-align: center;
+        margin-top: 8rem;
+    }
+
+    p {
+        text-align: center;
+    }
+
+}
