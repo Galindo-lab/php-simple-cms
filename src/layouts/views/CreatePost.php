@@ -22,11 +22,11 @@ require_once __DIR__ . '/../../base/Config.php';
             <input type="text" id="nombre" name="name" required>
         </p>
 
-        <div>
+        <p>
             <button type="button" id="previewButton" onclick="togglePreview()">Ver Vista Previa</button>
             <button type="button" onclick="window.history.back()">Cancelar</button>
             <button type="submit">Enviar</button>
-        </div>
+        </p>
 
         <p id="textarea-container">
             <textarea placeholder="Escribe el contenido de tu entrada aquí." id="mensaje" name="entry" rows="20" cols="30" required></textarea>
