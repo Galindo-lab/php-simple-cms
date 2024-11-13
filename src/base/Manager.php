@@ -1,8 +1,10 @@
 <?php
 
 /*****************************************************************************
+ *                                                                           *
  * Funciones comunes para Managers.                                          *
  * Como Obtener la conexión y hacer consultas.                               *
+ *                                                                           *
  *****************************************************************************/
 
 require_once __DIR__ . '/Connection.php';
