@@ -1,5 +1,4 @@
 <?php
-require_once 'settings.php';
 require_once 'app/views.php';
 require_once 'routes.php';
 

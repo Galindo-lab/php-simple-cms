@@ -1,9 +1,20 @@
 <?php
 require_once __DIR__ . '/../base/View.php';
 require_once __DIR__ . '/../base/Utils.php';
-
-
 require_once __DIR__ . '/../app/managers.php';
+
+
+
+class CreateEntry extends View
+{
+    public function get($params): void {
+        Utils::renderTemplate(template: 'views/CreateEntry.php');
+    }
+
+    public function post($params): void {
+
+    }
+}
 
 
 
@@ -92,7 +103,7 @@ class ContactView extends View
 {
     public function get($params): void
     {
-        echo $params['a'];
+        // echo $params['a'];
         // Incluir el archivo de la plantilla
         include_once __DIR__ . '/../layouts/archivo.php';
     }
