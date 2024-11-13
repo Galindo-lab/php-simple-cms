@@ -8,6 +8,7 @@ $routes = [
 
     // usuarios
     '/login' => UserLogin::Class,
+    '/logout' => UserLogout::Class,
 
     // métodos para actualizar posts
     '/posts' => PostList::class,

@@ -13,12 +13,15 @@ require_once __DIR__ . '/../../base/Config.php';
     <link rel="stylesheet" href="<?= '../' . Config::$STATIC_ROOT . 'Lumpia.css' ?>">
 </head>
 
-<body>
+<body>  
     <h1>Posts</h1>
 
     <p>
         <ul>
             <li><a href="posts/new">Crear Post</a></li>
+        </ul>
+        <ul>
+            <li><a href="logout">Cerrar Sesión</a></li>
         </ul>
     </p>
 

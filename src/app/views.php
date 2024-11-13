@@ -3,6 +3,24 @@ require_once __DIR__ . '/../base/View.php';
 require_once __DIR__ . '/../base/Utils.php';
 require_once __DIR__ . '/../app/managers.php';
 
+/**
+ * Logout de usuarios
+ */
+class UserLogout extends View
+{
+    public function get($params): void
+    {
+        session_start();
+        session_destroy();
+        header('Location: /login');
+        exit();
+    }
+}
+
+
+/**
+ * Login de usuario
+ */
 class UserLogin extends View
 {
     public function get($params): void
