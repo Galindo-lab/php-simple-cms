@@ -18,24 +18,26 @@ require_once __DIR__ . '/../../base/Config.php';
 
     <form action="/posts/new" method="post">
         <p>
-            <label for="nombre">Nombre:</label>
+            <label for="nombre">Nombre de la entrada:</label>
             <input type="text" id="nombre" name="name" required>
-            <small>Introduce el nombre de la entrada.</small>
         </p>
 
-
-        <button type="button" id="previewButton" onclick="togglePreview()">Ver Vista Previa</button>
-        <button type="submit">Enviar</button>
-        <button type="button" onclick="cancel()">Cancelar</button>
+        <div>
+            <button type="button" id="previewButton" onclick="togglePreview()">Ver Vista Previa</button>
+            <button type="button" onclick="window.history.back()">Cancelar</button>
+            <button type="submit">Enviar</button>
+        </div>
 
         <p id="textarea-container">
-            <textarea id="mensaje" name="entry" rows="20" cols="30" required></textarea>
-            <small>Escribe el contenido de tu entrada aquí.</small>
+            <textarea placeholder="Escribe el contenido de tu entrada aquí." id="mensaje" name="entry" rows="20" cols="30" required></textarea>
+            <small>Puedes agregar html y ver el resultado con la opción de vista previa</small>
         </p>
 
-        <div id="preview-container">
+        <div id="preview-container" style="padding: 0.5em;">
             <!-- La vista previa se mostrará aquí -->
         </div>
+
+
     </form>
 
     <script>
@@ -57,14 +59,6 @@ require_once __DIR__ . '/../../base/Config.php';
                 previewContainer.style.display = 'none';
                 previewButton.textContent = 'Ver Vista Previa';
             }
-        }
-
-        function cancel() {
-            document.getElementById('mensaje').value = '';
-            document.getElementById('preview-container').innerHTML = '';
-            document.getElementById('preview-container').style.display = 'none';
-            document.getElementById('textarea-container').style.display = 'block';
-            document.getElementById('previewButton').textContent = 'Ver Vista Previa';
         }
     </script>
 </body>
