@@ -37,7 +37,7 @@ class CreatePost extends View
 
         // Intentar crear el post
         if (PostsManager::create($title, $content, $user_id)) {
-            echo "Post creado exitosamente.";
+            header('Location: /entries'); // regirigir al usuario
         } else {
             echo "Error al crear el post.";
         }
