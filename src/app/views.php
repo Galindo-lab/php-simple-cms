@@ -3,19 +3,41 @@ require_once __DIR__ . '/../base/View.php';
 require_once __DIR__ . '/../base/Utils.php';
 require_once __DIR__ . '/../app/managers.php';
 
+class UserLogin extends View
+{
+    public function get($params): void
+    {
+        Utils::renderTemplate(template: 'views/LoginUser.php');
+    }
+
+    public function post($params): void 
+    {
+        // Sanitiza los inputs para evitar problemas de seguridad básicos
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
+        if (UserManager::verifyCredentials($username, $password)) {
+            $_SESSION['loggedin'] = true;
+            $_SESSION['username'] = $username;
+            header('Location: /posts');
+        } else {
+            echo "Nombre de usuario o contraseña incorrectos.";
+        }
+
+        echo $username . $password;
+    }
+}
+
 
 /**
  * Vista con la entrada del blog
  */
 class ViewPost extends View
 {
-    public function get($params): void 
+    public function get($params): void
     {
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']); // Asegurarse de que sea un entero
             $post = PostsManager::getById($id); // Obtener el post por ID
-
-            // echo $post["content"];
 
             Utils::renderTemplate(template: 'views/ViewPost.php', data: [
                 'title' => $post['title'],
@@ -23,8 +45,6 @@ class ViewPost extends View
                 'created_at' => $post["created_at"]
             ]);
         }
-
-
     }
 }
 

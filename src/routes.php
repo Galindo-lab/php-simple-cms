@@ -6,6 +6,9 @@ $routes = [
     '/contact' => ContactView::class,
     '/upload' => UploadFiles::class,
 
+    // usuarios
+    '/login' => UserLogin::Class,
+
     // métodos para actualizar posts
     '/posts' => PostList::class,
     '/posts/new' => CreatePost::class,

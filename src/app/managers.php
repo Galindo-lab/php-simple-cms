@@ -23,6 +23,32 @@ class UserManager extends Manager
     {
         return Manager::query(query: 'SELECT * FROM Users');
     }
+
+    /**
+     * Verifica si el username y password coinciden.
+     *
+     * @param string $username El nombre de usuario.
+     * @param string $password La contraseña proporcionada (sin hash).
+     *
+     * @return bool Devuelve true si coinciden, false en caso contrario.
+     */
+    public static function verifyCredentials(string $username, string $password): bool
+    {
+        $conn = self::connection();
+        $stmt = $conn->prepare("SELECT password FROM Users WHERE username = ?");
+        if ($stmt) {
+            $stmt->bind_param('s', $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $user = $result->fetch_assoc();
+
+            if ($user && $user['password'] === $password) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
 
 
