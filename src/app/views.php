@@ -4,9 +4,32 @@ require_once __DIR__ . '/../base/Utils.php';
 require_once __DIR__ . '/../app/managers.php';
 
 
-class DeletePost extends View 
+/**
+ * 
+ */
+class EditPost extends View
 {
-    public function get($params): void 
+    public function get($params): void {
+        if (isset($_GET['id'])) {
+            $id = intval(value: $_GET['id']); // Asegurarse de que sea un entero
+            $post = PostsManager::getById(id: $id); // asegurarse que le post existe
+
+            $_POST['name'] = $post['title'];
+            $_POST['entry'] = $post['content'];
+
+            Utils::renderTemplate(template: 'views/CreatePost.php');
+        }
+    }
+}
+
+
+
+/**
+ * Eliminar post
+ */
+class DeletePost extends View
+{
+    public function get($params): void
     {
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']); // Asegurarse de que sea un entero
@@ -19,7 +42,6 @@ class DeletePost extends View
         }
     }
 }
-
 
 
 /**
@@ -63,9 +85,11 @@ class UserLogin extends View
         // Sanitiza los inputs para evitar problemas de seguridad básicos
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
+
         if (UserManager::verifyCredentials($username, $password)) {
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $username;
+            
             header('Location: /posts');
         } else {
             echo "Nombre de usuario o contraseña incorrectos.";
@@ -126,7 +150,11 @@ class CreatePost extends View
         // Datos del post
         $title = $_POST['name'];
         $content = $_POST['entry'];
-        $user_id = 1; // ID del usuario que crea el post
+
+        // falta validación 
+        $user_id = UserManager::getIdByUsername($_SESSION['username']);
+
+        // $user_id = 1; // ID del usuario que crea el post
 
         // Intentar crear el post
         if (PostsManager::create($title, $content, $user_id)) {
@@ -198,8 +226,7 @@ class HomeView extends View
 {
     public function get($params): void
     {
-
-        header('Location: /login');
+        Utils::redirect('/login');
 
         /*
         Utils::renderTemplate(template: 'index.php', data: [

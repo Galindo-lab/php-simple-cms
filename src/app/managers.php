@@ -49,6 +49,25 @@ class UserManager extends Manager
 
         return false;
     }
+
+    /**
+     * Summary of getIdByUsername
+     * @param string $username
+     * @return mixed
+     */
+    public static function getIdByUsername(string $username): ?int
+    {
+        $conn = self::connection();
+        $stmt = $conn->prepare("SELECT id FROM Users WHERE username = ?");
+        if ($stmt) {
+            $stmt->bind_param('s', $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $user = $result->fetch_assoc();
+            return $user['id'] ?? null;
+        }
+        return null;
+    }
 }
 
 

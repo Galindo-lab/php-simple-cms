@@ -17,5 +17,6 @@ $routes = [
     '/posts' => PostList::class,
     '/posts/new' => CreatePost::class,
     '/posts/view' => ViewPost::Class,
-    '/posts/delete' => DeletePost::Class
+    '/posts/delete' => DeletePost::Class,
+    '/posts/edit' => EditPost::class
 ];
