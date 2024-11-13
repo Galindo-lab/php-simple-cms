@@ -3,6 +3,16 @@ require_once __DIR__ . '/../base/View.php';
 require_once __DIR__ . '/../base/Utils.php';
 require_once __DIR__ . '/../app/managers.php';
 
+
+class NotFound404 extends View
+{
+    public function get($params): void
+    {
+        Utils::renderTemplate(template: 'exeptions/404.php');
+    }
+}
+
+
 /**
  * Logout de usuarios
  */
@@ -10,7 +20,6 @@ class UserLogout extends View
 {
     public function get($params): void
     {
-        session_start();
         session_destroy();
         header('Location: /login');
         exit();
@@ -28,7 +37,7 @@ class UserLogin extends View
         Utils::renderTemplate(template: 'views/LoginUser.php');
     }
 
-    public function post($params): void 
+    public function post($params): void
     {
         // Sanitiza los inputs para evitar problemas de seguridad básicos
         $username = trim($_POST['username']);
@@ -68,16 +77,18 @@ class ViewPost extends View
 /**
  * Vista para ver todos los posts hechos
  */
-class PostList extends View
+class PostList extends ProtectedView
 {
-    public function get($params): void
+    public function p_get($params): void
     {
-        Utils::renderTemplate(template: 'views/ListPosts.php', data: [
-            'posts' => PostsManager::all()
-        ]);
+        if (isset($_SESSION['loggedin'])) {
+            Utils::renderTemplate(template: 'views/ListPosts.php', data: [
+                'posts' => PostsManager::all()
+            ]);
+        }
     }
 }
- 
+
 
 /**
  * Vista para crear Posts

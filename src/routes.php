@@ -6,6 +6,9 @@ $routes = [
     '/contact' => ContactView::class,
     '/upload' => UploadFiles::class,
 
+    // errores
+    '/NotFound' => NotFound404::Class,
+
     // usuarios
     '/login' => UserLogin::Class,
     '/logout' => UserLogout::Class,
