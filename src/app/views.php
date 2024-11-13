@@ -4,6 +4,27 @@ require_once __DIR__ . '/../base/Utils.php';
 require_once __DIR__ . '/../app/managers.php';
 
 
+class DeletePost extends View 
+{
+    public function get($params): void 
+    {
+        if (isset($_GET['id'])) {
+            $id = intval($_GET['id']); // Asegurarse de que sea un entero
+            
+            if(PostsManager::deleteById($id)) {
+                Utils::redirect('/posts');
+            } else {
+                echo "Error";
+            }
+        }
+    }
+}
+
+
+
+/**
+ * Desloggearse del sisitema
+ */
 class NotFound404 extends View
 {
     public function get($params): void
@@ -21,7 +42,7 @@ class UserLogout extends View
     public function get($params): void
     {
         session_destroy();
-        header('Location: /login');
+        Utils::redirect('/login');
         exit();
     }
 }

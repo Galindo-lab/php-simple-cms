@@ -25,5 +25,13 @@ class Utils {
         $output = ob_get_clean();
         echo $output;
     }
+
+
+    /**
+     * Redirigir al usuario a una URL
+     */
+    public static function redirect(string $url): void {
+        header('Location: ' . $url);
+    }
     
 }

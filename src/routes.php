@@ -16,5 +16,6 @@ $routes = [
     // métodos para actualizar posts
     '/posts' => PostList::class,
     '/posts/new' => CreatePost::class,
-    '/posts/view' => ViewPost::Class
+    '/posts/view' => ViewPost::Class,
+    '/posts/delete' => DeletePost::Class
 ];

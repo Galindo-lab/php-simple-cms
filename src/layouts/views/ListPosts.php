@@ -31,16 +31,19 @@ require_once __DIR__ . '/../../base/Config.php';
                 <th>ID</th>
                 <th>Title</th>
                 <th>Created At</th>
-                <th>Updated At</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <?php
             foreach ($posts as $post) {
+                echo "<tr>";
                 echo "<td>{$post['id']}</td>";
                 echo "<td><a href='/posts/view?id={$post['id']}'>{$post['title']}</a></td>";
                 echo "<td>{$post['created_at']}</td>";
-                echo "<td>{$post['updated_at']}</td>";
+                echo "<td>";
+                echo "<a href='/posts/delete?id={$post['id']}'>Eliminar</a>";
+                echo "</td>";
                 echo "</tr>";
             }
             ?>

@@ -105,4 +105,23 @@ class PostsManager extends Manager
             return [];
         }
     }
+
+    /**
+     * Elimina un post por su ID.
+     *
+     * @param int $id El ID del post que deseas eliminar.
+     *
+     * @return bool Devuelve true si la eliminación fue exitosa, false en caso contrario.
+     */
+    public static function deleteById($id): bool
+    {
+        $conn = self::connection();
+        $stmt = $conn->prepare("DELETE FROM Posts WHERE id = ?");
+        if ($stmt) {
+            $stmt->bind_param('i', $id);
+            return $stmt->execute();
+        } else {
+            return false;
+        }
+    }
 }
