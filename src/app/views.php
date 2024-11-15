@@ -34,13 +34,12 @@ class EditPost extends View
             $entry = $_POST['entry'];
 
             // Actualizar solo los campos del post.
-            if (
-                PostsManager::updatePost(postId: $postId, fields: [
-                    'title' => $name,
-                    'content' => $entry
-                ])
-            ) {
+            $post_updated = PostsManager::updatePost(postId: $postId, fields: [
+                'title' => $name,
+                'content' => $entry
+            ]);
 
+            if ($post_updated) {
                 Utils::redirect('/posts');
             } else {
                 echo "Error al actualizar el post.";
