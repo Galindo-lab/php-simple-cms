@@ -4,6 +4,20 @@ require_once __DIR__ . '/../base/Utils.php';
 require_once __DIR__ . '/../app/managers.php';
 
 
+
+
+
+class Register extends View
+{
+    public function get($param): void
+    {
+        Utils::renderTemplate(template: 'views/RegisterUser.php');
+    }
+}
+
+
+
+
 /**
  * Editar post
  */

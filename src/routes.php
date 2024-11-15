@@ -15,6 +15,7 @@ $routes = [
     // usuarios
     '/login' => UserLogin::Class,
     '/logout' => UserLogout::Class,
+    '/register' => Register::class,
 
     // métodos para actualizar posts
     '/posts/new' => CreatePost::class,

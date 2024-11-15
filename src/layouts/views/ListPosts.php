@@ -40,9 +40,9 @@ require_once __DIR__ . '/../../base/Config.php';
 
         <div style="display: flex; justify-content: space-between; margin: 1rem 0 1rem 0rem;">
             <b>Posts</b>
-            <button onclick="window.location.href='posts/new'">
+            <a href="posts/new">
                 Crear Post
-            </button>
+            </a>
         </div>
 
         <table>
@@ -76,6 +76,9 @@ require_once __DIR__ . '/../../base/Config.php';
 
         <div style="display: flex; justify-content: space-between; margin: 1rem 0 1rem 0rem;">
             <b>Usuarios</b>
+            <a href='/register'>
+                Crear Usuario
+            </a>
         </div>
 
         <table>
