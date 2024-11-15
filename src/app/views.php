@@ -15,11 +15,12 @@ class EditPost extends View
             $id = intval(value: $_GET['id']); // Asegurarse de que sea un entero
             $post = PostsManager::getById(id: $id); // asegurarse que le post existe
 
-            Utils::renderTemplate(template: 'views/EditPost.php', data: [
-                'title' => $post['title'],
-                'content' => $post['content'],
+            Utils::renderTemplate(template: 'views/CreatePost.php', data: [
+                'title_value' => $post['title'],
+                'entry_value' => $post['content'],
                 'user_id' => $post['user_id'],
                 'post_id' => $post['id'],
+                'form_action' => '/posts/edit'
             ]);
         }
     }
@@ -27,17 +28,19 @@ class EditPost extends View
 
     public function post($params): void
     {
-        if (isset($_POST['post_id'], $_POST['name'], $_POST['entry'])) {
+        if (isset($_POST['post_id'], $_POST['title'], $_POST['entry'])) {
             $postId = $_POST['post_id'];
-            $name = $_POST['name'];
+            $name = $_POST['title'];
             $entry = $_POST['entry'];
 
             // Actualizar solo los campos del post.
-            if (PostsManager::updatePost($postId, [
-                'title' => $name,
-                'content' => $entry
-                ])) {
-                    
+            if (
+                PostsManager::updatePost(postId: $postId, fields: [
+                    'title' => $name,
+                    'content' => $entry
+                ])
+            ) {
+
                 Utils::redirect('/posts');
             } else {
                 echo "Error al actualizar el post.";
@@ -138,7 +141,7 @@ class ViewPost extends View
             Utils::renderTemplate(template: 'views/ViewPost.php', data: [
                 'title' => $post['title'],
                 'content' => $post["content"],
-                'created_at' => $post["created_at"]
+                'created_at' => $post["created_at"],
             ]);
         }
     }
@@ -169,13 +172,17 @@ class CreatePost extends View
 {
     public function get($params): void
     {
-        Utils::renderTemplate(template: 'views/CreatePost.php');
+        Utils::renderTemplate(template: 'views/CreatePost.php', data: [
+            'title_value' => '',
+            'entry_value' => '',
+            'form_action' => '/posts/new'
+        ]);
     }
 
     public function post($params): void
     {
         // Datos del post
-        $title = $_POST['name'];
+        $title = $_POST['title'];
         $content = $_POST['entry'];
 
         // falta validación 

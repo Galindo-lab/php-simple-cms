@@ -16,10 +16,14 @@ require_once __DIR__ . '/../../base/Config.php';
 <body>
     <h1>Crear una entrada</h1>
 
-    <form action="/posts/new" method="post">
+    <form action="<?= $form_action ?>" method="post">
+
+        <input type="hidden" name="user_id" value="<?= $user_id ?>">
+        <input type="hidden" name="post_id" value="<?= $post_id ?>">
+
         <p>
             <label for="nombre">Nombre de la entrada:</label>
-            <input type="text" id="nombre" name="name" required>
+            <input type="text" id="nombre" name="title" value="<?= $title_value ?>" required>
         </p>
 
         <p>
@@ -29,7 +33,7 @@ require_once __DIR__ . '/../../base/Config.php';
         </p>
 
         <p id="textarea-container">
-            <textarea placeholder="Escribe el contenido de tu entrada aquí." id="mensaje" name="entry" rows="20" cols="30" required></textarea>
+            <textarea placeholder="Escribe el contenido de tu entrada aquí." id="mensaje" name="entry" rows="20" cols="30" required><?= $entry_value ?></textarea>
             <small>Puedes agregar html y ver el resultado con la opción de vista previa</small>
         </p>
 
