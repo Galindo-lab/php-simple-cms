@@ -109,14 +109,14 @@ class UserLogin extends View
     public function post($params): void
     {
         // Sanitiza los inputs para evitar problemas de seguridad básicos
-        $username = trim($_POST['username']);
-        $password = trim($_POST['password']);
+        $username = trim(string: $_POST['username']);
+        $password = trim(string: $_POST['password']);
 
-        if (UserManager::verifyCredentials($username, $password)) {
+        if (UserManager::verifyCredentials(username: $username, password: $password)) {
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $username;
 
-            header('Location: /posts');
+            header(header: 'Location: /posts');
         } else {
             echo "Nombre de usuario o contraseña incorrectos.";
         }
@@ -148,13 +148,14 @@ class ViewPost extends View
 /**
  * Vista para ver todos los posts hechos
  */
-class PostList extends ProtectedView
+class MainView extends ProtectedView
 {
     public function p_get($params): void
     {
         if (isset($_SESSION['loggedin'])) {
             Utils::renderTemplate(template: 'views/ListPosts.php', data: [
-                'posts' => PostsManager::all()
+                'posts' => PostsManager::all(),
+                'users' => UserManager::all()
             ]);
         }
     }

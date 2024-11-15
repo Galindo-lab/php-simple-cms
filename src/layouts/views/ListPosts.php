@@ -18,6 +18,14 @@ require_once __DIR__ . '/../../base/Config.php';
     <title>Document</title>
 
     <link rel="stylesheet" href="<?= '../' . Config::$STATIC_ROOT . 'Lumpia.css' ?>">
+
+
+    <style>
+        th:nth-child(4),
+        td:nth-child(4) {
+            text-align: right;
+        }
+    </style>
 </head>
 
 <body>
@@ -36,7 +44,6 @@ require_once __DIR__ . '/../../base/Config.php';
                 Crear Post
             </button>
         </div>
-
 
         <table>
             <thead>
@@ -61,7 +68,37 @@ require_once __DIR__ . '/../../base/Config.php';
                     echo "</tr>";
                 }
                 ?>
+            </tbody>
+        </table>
 
+        <br>
+
+
+        <div style="display: flex; justify-content: space-between; margin: 1rem 0 1rem 0rem;">
+            <b>Usuarios</b>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($users as $user) {
+                    echo "<tr>";
+                    echo "<td>{$user['id']}</td>";
+                    echo "<td><a href='/posts/view?id={$user['id']}'>{$user['username']}</a></td>";
+                    echo "<td>{$user['created_at']}</td>";
+                    echo "<td>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                ?>
             </tbody>
         </table>
 

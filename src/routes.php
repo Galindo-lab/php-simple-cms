@@ -9,12 +9,14 @@ $routes = [
     // errores
     '/NotFound' => NotFound404::Class,
 
+    // Vistas extras
+    '/posts' => MainView::class,
+
     // usuarios
     '/login' => UserLogin::Class,
     '/logout' => UserLogout::Class,
 
     // métodos para actualizar posts
-    '/posts' => PostList::class,
     '/posts/new' => CreatePost::class,
     '/posts/view' => ViewPost::Class,
     '/posts/delete' => DeletePost::Class,
